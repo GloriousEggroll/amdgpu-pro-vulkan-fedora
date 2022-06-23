@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo dnf -y install mock pykickstart fedpkg
+sudo dnf -y install mock pykickstart fedpkg libvirt
 
 # download AMD's AMDF libraries
 if [ ! -f "vulkan-amdgpu-pro_21.50.2-1384495_amd64.deb" ]; then
@@ -11,7 +11,7 @@ wget --referer https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified
 fi
 
 # create a fedora srpm from the spec sheet
-fedpkg --release f35 srpm
+fedpkg --release f36 srpm
 
 # add current user to 'mock' build group
 sudo usermod -a -G mock $USER
@@ -21,11 +21,11 @@ sudo setenforce 0
 
 # build the package
 # x86_64
-mock -r /etc/mock/fedora-35-x86_64.cfg --rebuild amdgpu-pro-vulkan*.src.rpm
-sudo mv /var/lib/mock/fedora-35-x86_64/result/* .
+mock -r /etc/mock/fedora-36-x86_64.cfg --rebuild amdgpu-pro-vulkan*.src.rpm
+sudo mv /var/lib/mock/fedora-36-x86_64/result/* .
 # i386
-mock -r /etc/mock/fedora-35-i386.cfg --rebuild amdgpu-pro-vulkan*.src.rpm
-sudo mv /var/lib/mock/fedora-35-i686/result/* .
+mock -r /etc/mock/fedora-36-i386.cfg --rebuild amdgpu-pro-vulkan*.src.rpm
+sudo mv /var/lib/mock/fedora-36-i686/result/* .
 
 # re-enable selinux if needed
 sudo setenforce 1
@@ -35,5 +35,5 @@ sudo dnf -y --nogpgcheck install amdgpu-pro-vulkan*.x86_64.rpm amdgpu-pro-vulkan
 
 # cleanup
 rm *.log
-mock -r /etc/mock/fedora-35-x86_64.cfg --scrub=all
-mock -r /etc/mock/fedora-35-i386.cfg --scrub=all
+mock -r /etc/mock/fedora-36-x86_64.cfg --scrub=all
+mock -r /etc/mock/fedora-36-i386.cfg --scrub=all
