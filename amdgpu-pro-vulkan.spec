@@ -17,8 +17,8 @@
 # Therefore it's illegal to distribute the .src.rpm or .rpm files to third
 # parties.
 
-%global major 21.50.2
-%global minor 1384495
+%global major 22.10.3
+%global minor 1420323
 
 # RPM flags
 %global debug_package %{nil}
@@ -30,9 +30,8 @@ Summary:        AMD Vulkan driver for AMD graphic cards
 
 License:        EULA NON-REDISTRIBUTABLE
 URL:            https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-21-50-2
-Source0:        http://repo.radeon.com/amdgpu/%{major}/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_%{major}-%{minor}_i386.deb
-Source1:        http://repo.radeon.com/amdgpu/%{major}/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_%{major}-%{minor}_amd64.deb
-
+Source0:        http://repo.radeon.com/amdgpu/22.10.3/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_22.10.3-1420323_i386.deb
+Source1:        http://repo.radeon.com/amdgpu/22.10.3/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_22.10.3-1420323_amd64.deb
 
 %description
 AMD Vulkan encoder userspace driver as provided in the amdgpu-pro driver stack. This package
@@ -83,5 +82,8 @@ install -p -m755 files/opt/amdgpu-pro/etc/vulkan/icd.d/* %{buildroot}%{_datadir}
 %{_datadir}/vulkan/icd.d/*
 
 %changelog
+* Sun Jun 26 2022 update - 22.10.3.1420323
+- Update to 22.10.3
+
 * Sun Mar 27 2022 initial commit - 21.50.2.1384495
 - Update to 21.50
