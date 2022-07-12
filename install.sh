@@ -3,11 +3,11 @@
 sudo dnf -y install mock pykickstart fedpkg libvirt
 
 # download AMD's vulkan libraries
-if [ ! -f "vulkan-amdgpu-pro_22.20-1438747~22.04_amd64.deb" ]; then
-wget --referer https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-21-50 -N http://repo.radeon.com/amdgpu/22.20/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_22.20-1438747~22.04_amd64.deb
+if [ ! -f "vulkan-amdgpu-pro_21.40.2-1350683_amd64.deb" ]; then
+wget --referer https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-21-50 -N https://repo.radeon.com/amdgpu/21.40.2/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_21.40.2-1350683_amd64.deb
 fi
-if [ ! -f "vulkan-amdgpu-pro/vulkan-amdgpu-pro_22.20-1438747~22.04_i386.deb" ]; then
-wget --referer https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-21-50 -N http://repo.radeon.com/amdgpu/22.20/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_22.20-1438747~22.04_i386.deb
+if [ ! -f "vulkan-amdgpu-pro_21.40.2-1350683_i386.deb" ]; then
+wget --referer https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-21-50 -N https://repo.radeon.com/amdgpu/21.40.2/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_21.40.2-1350683_i386.deb
 fi
 
 # create a fedora srpm from the spec sheet

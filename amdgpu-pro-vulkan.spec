@@ -17,9 +17,8 @@
 # Therefore it's illegal to distribute the .src.rpm or .rpm files to third
 # parties.
 
-%global major 22.20
-%global minor 1438747
-%global ubuntu 22.04
+%global major 21.40.2
+%global minor 1350683
 
 # RPM flags
 %global debug_package %{nil}
@@ -31,8 +30,8 @@ Summary:        AMD Vulkan driver for AMD graphic cards
 
 License:        EULA NON-REDISTRIBUTABLE
 URL:            https://www.amd.com/en/support/kb/release-notes/rn-amdgpu-unified-linux-21-50-2
-Source0:        http://repo.radeon.com/amdgpu/%{major}/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_%{major}-%{minor}~%{ubuntu}_i386.deb
-Source1:        http://repo.radeon.com/amdgpu/%{major}/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_%{major}-%{minor}~%{ubuntu}_amd64.deb
+Source0:        http://repo.radeon.com/amdgpu/%{major}/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_%{major}-%{minor}_i386.deb
+Source1:        http://repo.radeon.com/amdgpu/%{major}/ubuntu/pool/proprietary/v/vulkan-amdgpu-pro/vulkan-amdgpu-pro_%{major}-%{minor}_amd64.deb
 
 %description
 AMD Vulkan encoder userspace driver as provided in the amdgpu-pro driver stack. This package
@@ -44,10 +43,10 @@ mkdir files
 # AMF
 %ifarch i686
 cp %{SOURCE0} .
-ar x vulkan-amdgpu-pro_%{major}-%{minor}~%{ubuntu}_i386.deb
+ar x vulkan-amdgpu-pro_%{major}-%{minor}_i386.deb
 %else
 cp %{SOURCE1} .
-ar x vulkan-amdgpu-pro_%{major}-%{minor}~%{ubuntu}_amd64.deb
+ar x vulkan-amdgpu-pro_%{major}-%{minor}_amd64.deb
 %endif
 tar -xJC files -f data.tar.xz
 
