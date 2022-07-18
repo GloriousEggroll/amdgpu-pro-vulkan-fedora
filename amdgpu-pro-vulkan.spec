@@ -25,7 +25,7 @@
 
 Name:           amdgpu-pro-vulkan
 Version:        %{major}.%{minor}
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        AMD Vulkan driver for AMD graphic cards
 
 License:        EULA NON-REDISTRIBUTABLE
@@ -54,32 +54,30 @@ tar -xJC files -f data.tar.xz
 # fix vulkan loader path
 pushd files/opt/amdgpu-pro/etc/vulkan/icd.d/
 %ifarch i686
-sed -i 's/\/opt\/amdgpu-pro\/lib\/i386-linux-gnu\//\/usr\/lib64\/amdgpu-pro-vulkan\//g' amd_icd32.json
-mv amd_icd32.json amd_pro_icd32.json
+sed -i 's/\/opt\/amdgpu-pro\/lib\/i386-linux-gnu\//\/opt\/amdgpu-pro\/%{_lib}\//g' amd_icd32.json
 %else
-sed -i 's/\/opt\/amdgpu-pro\/lib\/x86_64-linux-gnu\//\/usr\/lib64\/amdgpu-pro-vulkan\//g' amd_icd64.json
-mv amd_icd64.json amd_pro_icd64.json
+sed -i 's/\/opt\/amdgpu-pro\/lib\/x86_64-linux-gnu\//\/opt\/amdgpu-pro\/%{_lib}\//g' amd_icd64.json
 %endif
 popd
 
 %install
-mkdir -p %{buildroot}%{_datadir}/vulkan/icd.d/
-mkdir -p %{buildroot}%{_libdir}/amdgpu-pro-vulkan
+mkdir -p %{buildroot}/opt/amdgpu-pro/etc/vulkan/icd.d/
+mkdir -p %{buildroot}/opt/amdgpu-pro/%{_lib}/
 
 %ifarch i686
-install -p -m755 files/opt/amdgpu-pro/lib/i386-linux-gnu/* %{buildroot}%{_libdir}/amdgpu-pro-vulkan/
+install -p -m755 files/opt/amdgpu-pro/lib/i386-linux-gnu/* %{buildroot}/opt/amdgpu-pro/%{_lib}/
 %else
-install -p -m755 files/opt/amdgpu-pro/lib/x86_64-linux-gnu/* %{buildroot}%{_libdir}/amdgpu-pro-vulkan/
+install -p -m755 files/opt/amdgpu-pro/lib/x86_64-linux-gnu/* %{buildroot}/opt/amdgpu-pro/%{_lib}/
 %endif
 
-install -p -m755 files/opt/amdgpu-pro/etc/vulkan/icd.d/* %{buildroot}%{_datadir}/vulkan/icd.d/
+install -p -m755 files/opt/amdgpu-pro/etc/vulkan/icd.d/* %{buildroot}/opt/amdgpu-pro/etc/vulkan/icd.d/
 
 
 %files
-%dir %{_libdir}/amdgpu-pro-vulkan/
-%dir %{_datadir}/vulkan/icd.d/
-%{_libdir}/amdgpu-pro-vulkan/*
-%{_datadir}/vulkan/icd.d/*
+%dir /opt/amdgpu-pro/%{_lib}/
+%dir /opt/amdgpu-pro/etc/vulkan/icd.d/
+/opt/amdgpu-pro/%{_lib}/*
+/opt/amdgpu-pro/etc/vulkan/icd.d/*
 
 %changelog
 * Sun Jun 26 2022 update - 22.10.3.1420323
